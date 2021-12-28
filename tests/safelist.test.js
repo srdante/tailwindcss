@@ -222,3 +222,27 @@ it('should safelist negatives based on a pattern regex', () => {
     `)
   })
 })
+
+it('should safelist background color opacities based on a pattern regex', () => {
+  let config = {
+    content: [{ raw: html`<div class="uppercase"></div>` }],
+    safelist: [
+      {
+        pattern: /^bg-red-(100|500\/50)$/,
+      },
+    ],
+  }
+
+  return run('@tailwind utilities', config).then((result) => {
+    return expect(result.css).toMatchCss(css`
+      .bg-red-100 {
+        --tw-bg-opacity: 1;
+        background-color: rgb(254 226 226 / var(--tw-bg-opacity));
+      }
+      
+      .bg-red-500\/50 {
+        background-color: rgb(239 68 68 / 0.5);
+      }
+    `)
+  })
+})

@@ -243,6 +243,10 @@ it('should safelist background color opacities based on a pattern regex', () => 
       .bg-red-500\/50 {
         background-color: rgb(239 68 68 / 0.5);
       }
+      
+      .uppercase {
+        text-transform: uppercase;
+      }
     `)
   })
 })
